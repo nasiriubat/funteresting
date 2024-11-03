@@ -1,0 +1,100 @@
+body {
+  background-color: #f0f3f5;
+  margin: 0;
+}
+
+.main-canvas {
+  width: 100%;
+  max-width: 350px;
+  height: 200px;
+  background-color: white;
+  border: 10px solid #3c3c3c;
+  border-radius: 10px 10px 5px 5px;
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3);
+}
+
+.canvas-container {
+  position: relative;
+  display: inline-block;
+  background-color: #e6e6e6;
+  padding: 5px;
+  border-radius: 10px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+.color-cans {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.color-can {
+  width: 80px;
+  height: 100px;
+  border-radius: 10px 10px 5px 5px;
+  background-color: #ddd;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid #444;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s;
+}
+
+.color-can:hover {
+  transform: scale(1.1);
+}
+
+#redCanvas {
+  background-color: #ff4c4c;
+}
+
+#greenCanvas {
+  background-color: #4cff4c;
+}
+
+#blueCanvas {
+  background-color: #4c4cff;
+}
+
+.color-percentage {
+  color: #fff;
+  font-weight: bold;
+  font-size: 1.1rem;
+  margin-bottom: 3px;
+}
+
+.click-count {
+  color: #fff;
+  font-weight: bold;
+  font-size: 0.8rem;
+  margin-bottom: 10px;
+}
+
+.brush-icon {
+  position: absolute;
+  top: 80%; /* start position at bottom of main canvas */
+  left: 5%;
+  transform: translateY(-50%) scale(1.4); /* size increased for a realistic brush appearance */
+  font-size: 2.5rem;
+  color: #444;
+  display: none;
+}
+
+#finalColorDisplay {
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+@media (max-width: 576px) {
+  .main-canvas {
+    height: 160px;
+    max-width: 300px;
+  }
+  .color-can {
+    width: 70px;
+    height: 80px;
+  }
+}

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Color Mixing Canvas</title>
+  <!-- Bootstrap CDN -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <!-- Toastr CSS for notifications -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+  <!-- FontAwesome CDN for Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container-fluid d-flex flex-column justify-content-center align-items-center" style="height: 100vh;">
+    
+    <!-- Main Canvas with Enhanced Style -->
+    <div class="canvas-container mb-3 position-relative">
+      <i class="fas fa-paint-brush brush-icon" id="paintBrush"></i>
+      <canvas id="mainCanvas" class="main-canvas"></canvas>
+    </div>
+    
+    <!-- Final Hex Color and Copy Icon -->
+    <div class="text-center mt-2" id="finalColorDisplay">
+      <p>
+        <strong>Final Color Hex:</strong> <span id="finalColorHex">#FFFFFF</span>
+        <button id="copyHex" class="btn btn-sm btn-secondary ml-2">
+          <i class="fas fa-copy"></i> 
+        </button>
+      </p>
+    </div>
+
+    <!-- RGB Color Canvases -->
+    <div class="d-flex justify-content-around mt-3 color-cans">
+      <div class="color-can mx-2" id="redCanvas" data-color="red">
+        <p class="color-percentage" id="redPercentage">0%</p>
+        <p class="click-count" id="redClickCount">0 clicks</p>
+      </div>
+      <div class="color-can mx-2" id="greenCanvas" data-color="green">
+        <p class="color-percentage" id="greenPercentage">0%</p>
+        <p class="click-count" id="greenClickCount">0 clicks</p>
+      </div>
+      <div class="color-can mx-2" id="blueCanvas" data-color="blue">
+        <p class="color-percentage" id="bluePercentage">0%</p>
+        <p class="click-count" id="blueClickCount">0 clicks</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- jQuery and Bootstrap Bundle -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+  <!-- Anime.js for animation -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+  <!-- Toastr for notifications -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+  <!-- TinyColor for color manipulation -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tinycolor/1.4.2/tinycolor.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
