@@ -1,38 +1,284 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reel Quote Generator</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Riddle Shorts</title>
+    <style>
+        /* General styling to make the page look like YouTube Shorts */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body,
+        html {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #000;
+            overflow: hidden;
+        }
+
+        /* Main container centered with a mobile screen size */
+        .shorts-container {
+            position: relative;
+            width: 360px;
+            height: 640px;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Video styling */
+        video {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1;
+        }
+
+        /* Overlay for displaying the riddle */
+        .overlay {
+            position: absolute;
+            top: 10%;
+            left: 0;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            font-family: Arial, sans-serif;
+            color: #000;
+            padding: 10px;
+            z-index: 2;
+        }
+
+        /* Title for Riddle with full-width white background and animation */
+        .title {
+            font-size: 32px;
+            font-weight: bold;
+            color: #ffffff;
+            background-color: #ed5b26;
+            width: 100%;
+            padding: 10px;
+            text-align: center;
+            margin-bottom: 10px;
+            opacity: 0;
+            transform: translateX(-100px);
+            animation: fadeInLeft 1s forwards;
+        }
+
+        @keyframes fadeInLeft {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Countdown timer at the top */
+        .countdown {
+            font-size: 28px;
+            font-weight: bold;
+            color: #ff0000;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 6px 12px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+
+        /* Riddle text with white background and padding */
+        #riddle-text {
+            font-size: 25px;
+            font-weight: bold;
+            background: rgba(255, 255, 255, 0.758);
+            padding: 10px;
+            line-height: 1.5;
+            width: 100%;
+            border-radius: 8px;
+        }
+
+        /* Centered answer styling */
+        .centered-answer {
+            position: absolute;
+            width: 80%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 25px;
+            font-weight: bold;
+            color: #000000;
+            background: rgb(118, 239, 150);
+            padding: 15px 20px;
+            border-radius: 10px;
+            text-align: center;
+            z-index: 3;
+            display: none;
+        }
+
+        /* Like, Follow, Subscribe button at the bottom */
+        .footer {
+            position: absolute;
+            bottom: 20%;
+            background-color: #ff0000;
+            color: #fff;
+            font-weight: bold;
+            font-size: 18px;
+            padding: 10px;
+            width: 100%;
+            text-align: center;
+            z-index: 2;
+        }
+
+        /* End-screen message and Next button with popup styling */
+        .end-screen {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            z-index: 4;
+        }
+
+        .end-screen .message {
+            font-size: 26px;
+            font-weight: bold;
+            color: #fff;
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 15px 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+        }
+
+        .end-screen .next-button {
+            font-size: 18px;
+            font-weight: bold;
+            color: #fff;
+            background-color: #3fa6f0;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+    </style>
 </head>
+
 <body>
-    <div class="container">
-        <div class="reel-viewer">
-            <img class="logo" src="./logo.png" alt="">
-            <video id="bgVideo" autoplay muted loop playsinline></video>
-            <div id="quoteOverlay" class="quote-overlay">
-                <p id="quoteText"></p>
-            </div>
-            <h3 class="follow-text">Follow for more ❤️</h3>
+
+    <!-- Main container for the shorts -->
+    <div class="shorts-container">
+        <!-- Video background -->
+        <video id="background-video" autoplay muted playsinline loop></video>
+
+        <!-- Overlay for displaying the riddle -->
+        <div class="overlay">
+            <div class="title">Riddle</div>
+            <div id="countdown" class="countdown">4</div>
+            <p id="riddle-text">Loading...</p>
         </div>
 
-        <div class="meta-section">
-            <h3>Title & Hashtags</h3>
-            <textarea id="generatedTitle" rows="3" readonly></textarea>
-            <button id="copyTitleBtn">Copy Title</button>
+        <!-- Centered answer display -->
+        <div id="centered-answer" class="centered-answer"></div>
+
+        <!-- Like, Follow, Subscribe section at the bottom -->
+        <div class="footer">
+            Like, Follow & Subscribe
         </div>
 
-        <div class="meta-section">
-            <h3>Description (includes Quote)</h3>
-            <textarea id="generatedDescription" rows="5" readonly></textarea>
-            <button id="copyDescriptionBtn">Copy Description</button>
-        </div>
-
-        <div class="action-buttons">
-            <button id="nextBtn">Next Quote </button>
+        <!-- Full-screen end message and Next button -->
+        <div class="end-screen" id="end-screen">
+            <div class="message">Like, Share & Subscribe</div>
+            <button class="next-button" onclick="location.reload()">Next Riddle</button>
         </div>
     </div>
-    <script src="script.js"></script>
+
+    <script>
+        // Select a random video from the 10 videos in the "videos" folder
+        const randomVideo = `videos/video(${Math.floor(Math.random() * 10) + 1}).mp4`;
+        const videoElement = document.getElementById('background-video');
+        videoElement.src = randomVideo;
+
+        // Ensure autoplay works on mobile devices by programmatically triggering play
+        videoElement.muted = true;
+        videoElement.playsInline = true;
+        videoElement.autoplay = true;
+        videoElement.loop = true;
+
+        // Attempt to play the video when it loads, with error handling for autoplay issues
+        videoElement.addEventListener('loadeddata', () => {
+            videoElement.play().catch(error => {
+                console.error('Autoplay failed:', error);
+            });
+            displayRiddle();
+        });
+
+        // Function to fetch a random riddle from the API
+        async function fetchRiddle() {
+            try {
+                const response = await fetch('https://riddles-api.vercel.app/random');
+                const data = await response.json();
+                const wordCount = data.riddle.split(' ').length;
+                // Only use riddles with 35 words or fewer
+                if (wordCount > 35) {
+                    return await fetchRiddle();
+                }
+                return data;
+            } catch (error) {
+                console.error('Error fetching riddle:', error);
+                return { riddle: 'What has keys but can\'t open locks?', answer: 'A piano' };
+            }
+        }
+
+        // Display the riddle question, countdown, and answer
+        async function displayRiddle() {
+            const riddle = await fetchRiddle();
+            const riddleTextElement = document.getElementById('riddle-text');
+            const countdownElement = document.getElementById('countdown');
+            const centeredAnswerElement = document.getElementById('centered-answer');
+            const endScreen = document.getElementById('end-screen');
+
+            // Show the riddle question and adjust countdown based on text length
+            riddleTextElement.textContent = riddle.riddle;
+            let countdown = Math.ceil(riddle.riddle.split(' ').length / 2); // 2 seconds per word on average
+            countdown = Math.max(countdown, 4); // Minimum 4 seconds
+
+            countdownElement.textContent = countdown;
+
+            // Countdown interval for showing question, then answer
+            const countdownInterval = setInterval(() => {
+                countdown--;
+                countdownElement.textContent = countdown;
+
+                if (countdown === 0) {
+                    clearInterval(countdownInterval);
+                    centeredAnswerElement.textContent = riddle.answer;
+                    centeredAnswerElement.style.display = 'block';
+                    countdownElement.style.display = 'none'; // Hide countdown completely
+                    riddleTextElement.style.display = 'none'; // Hide question text
+
+                    // Pause the video, show the answer for 3 seconds, then show end screen
+                    videoElement.pause();
+                    setTimeout(() => {
+                        centeredAnswerElement.style.display = 'none'; // Hide the answer
+                        endScreen.style.display = 'flex'; // Show Like, Share & Subscribe message and Next button
+                    }, 3000);
+                }
+            }, 1000);
+        }
+    </script>
+
 </body>
-</html> 
+
+</html>
