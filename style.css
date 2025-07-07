@@ -64,6 +64,7 @@ body {
     z-index: 1;
     background: rgb(251, 180, 14);
     width: 60%;
+    display: none;
 }
 
 #quoteText {
