@@ -29,7 +29,7 @@ body {
 
 .logo {
     position: absolute;
-    top: 20%;
+    top: 25%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 1;
@@ -46,7 +46,7 @@ body {
 
 .quote-overlay {
     position: absolute;
-    top: 45%;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 100%;
@@ -54,9 +54,21 @@ body {
 
 }
 
+.didyouknow {
+    font-size: 1.8rem;
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: rgb(0, 0, 0);
+    z-index: 1;
+    background: rgb(251, 180, 14);
+    width: 60%;
+}
+
 #quoteText {
     line-height: 1.5;
-    padding:  0 2rem 0 1.5rem;
+    padding: 0 2.5rem 0 2rem;
     text-align: center;
     color: rgb(255, 255, 255);
     font-size: 1.5rem;
@@ -66,21 +78,23 @@ body {
 }
 
 .follow-text {
-    color: #fff;
+    color: #000000;
     position: absolute;
     bottom: 20%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 1;
-    width: 100%;
+    /* width: 100%; */
     font-size: 1.2rem;
-    padding: 1rem;
+    padding: .5rem;
 
     /* waving animation */
     display: inline-block;
     animation: wave 3s infinite ease-in-out;
-    transform-origin:  center;
+    transform-origin: center;
     text-align: center;
+    background-color: white;
+    border-radius: 10px;
 }
 
 @keyframes wave {
@@ -91,6 +105,7 @@ body {
     25% {
         transform: translate(-50%, -50%) rotate(5deg);
     }
+
     50% {
         transform: translate(-50%, -50%) rotate(-5deg);
     }

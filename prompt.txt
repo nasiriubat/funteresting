@@ -1,0 +1,8 @@
+{
+    "quote": "Your brain runs on 20 watts.",
+    "category": "backgrounds",
+    "title": "Your brain runs on 20 watts. #shorts #reels #funny #amazingfact #factsdaily",
+    "description": "Your brain runs on 20 watts. #shorts #reels #funny #amazingfact #factsdaily"
+  } 
+
+give me here 50 unique items in the above format, choose the category from the following array ['backgrounds', 'nature', 'feelings', 'places', 'transportation', 'travel', 'fun', 'animals', 'music', 'buildings', 'education', 'science', 'industry', 'food', 'sports']
